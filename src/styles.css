@@ -11,3 +11,23 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .form-field {
     width: 100%;
 }
+
+.snackbar-error {
+    color: white;
+    --mdc-snackbar-container-color: red;
+}
+.snackbar-error button {
+    background-color: red;
+    color: white !important;
+    border: none;
+}
+
+.snackbar-success {
+    color: white;
+    --mdc-snackbar-container-color: green;
+}
+.snackbar-success button {
+    background-color: green;
+    color: white !important;
+    border: none;
+}
