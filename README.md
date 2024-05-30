@@ -1,4 +1,4 @@
-# SimpleBugTrackerClient
+# Simple Bug Tracker - Client
 The client is built in Angular17, using Angular Material.
 The client was built in VSCode version 1.89.1.
 
