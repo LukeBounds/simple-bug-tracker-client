@@ -1,0 +1,59 @@
+<form [formGroup]="form">
+
+    <h2 mat-dialog-title>{{newOrEdit}} Bug</h2>
+
+    <mat-dialog-content class="edit-form-display">
+
+        <mat-form-field class="form-field">
+            <mat-label>Title</mat-label>
+            <input matInput formControlName="title">
+            @if (form.controls.title.hasError('required')) {
+                <mat-error>Title is required</mat-error>
+            }
+            @if (form.controls.title.hasError('maxlength')) {
+                <mat-error>Title cannot be more than 50 characters</mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description"></textarea>
+            @if (form.controls.description.hasError('required')) {
+                <mat-error>Description is required</mat-error>
+            }
+            @if (form.controls.description.hasError('maxlength')) {
+                <mat-error>Description cannot be more than 1000 characters</mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+            <mat-label>Priority</mat-label>
+            <mat-select formControlName="priority">
+                @for (priority of bugPriorityList; track priority) {
+                    <mat-option [value]="priority">{{priority | bugPriority}}</mat-option>
+                }
+            </mat-select>
+            @if (form.controls.priority.hasError('required')) {
+                <mat-error>Priority is required</mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+            <mat-label>Assigned User</mat-label>
+            <mat-select formControlName="assignedUser" [compareWith]="compareUsers">
+                @for (user of users; track user.userId) {
+                    <mat-option [value]="user">{{user.name}}</mat-option>
+                }
+            </mat-select>
+            @if (form.controls.assignedUser.hasError('required')) {
+                <mat-error>Assigned user is required</mat-error>
+            }
+        </mat-form-field>
+
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+        <button mat-button (click)="cancel()">Cancel</button>
+        <button mat-button color="primary" (click)="save()" [disabled]="form.invalid">Save</button>
+    </mat-dialog-actions>
+</form>
