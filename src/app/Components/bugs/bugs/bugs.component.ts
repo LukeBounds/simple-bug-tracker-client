@@ -9,11 +9,12 @@ import { BugPriorityPipe } from '../../../Pipes/bug-priority.pipe';
 import { DatePipe } from '@angular/common';
 import { firstValueFrom } from 'rxjs';
 import { RouterModule } from '@angular/router';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-bugs',
   standalone: true,
-  imports: [RouterModule, MatButtonModule, MatCardModule, MatTableModule, BugPriorityPipe, DatePipe],
+  imports: [RouterModule, MatButtonModule, MatCardModule, MatTableModule, MatDividerModule, BugPriorityPipe, DatePipe],
   templateUrl: './bugs.component.html',
   styleUrl: './bugs.component.css'
 })

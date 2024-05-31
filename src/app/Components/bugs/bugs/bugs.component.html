@@ -3,6 +3,7 @@
         <mat-card-title>Bugs{{viewOpen ? '' : ' - Closed'}}</mat-card-title>
         <span class="spacer"></span>
         <button mat-button color="primary" (click)="viewOpenToggle()">{{viewOpen ? 'View Closed' : 'View Open'}}</button>
+        <mat-divider [vertical]="true"></mat-divider>
         <button mat-button color="primary" (click)="newBug()">New Bug</button>
     </mat-card-header>
 
