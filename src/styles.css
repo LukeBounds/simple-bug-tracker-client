@@ -11,6 +11,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .form-field {
     width: 100%;
 }
+.form-field.form-field-half {
+    width: 49%;
+}
+.form-field.form-field-half.form-field-half-left {
+    padding-right: 1%;
+}
+.form-field.form-field-half.form-field-half-right {
+    padding-left: 1%;
+}
 
 .snackbar-error {
     color: white;
