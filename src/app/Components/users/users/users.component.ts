@@ -26,7 +26,6 @@ export class UsersComponent implements OnInit {
   ){}
 
   displayedColumns=['name', 'email', 'action']
-  displayedHeaders=['name', 'email', ]
   users: UserDto[] = [];
 
   addUser() {
