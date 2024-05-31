@@ -23,15 +23,21 @@ export class BugsComponent implements OnInit{
     private bugService: BugService,
   ){}
 
-  displayedColumns=['title', 'description', 'priority', 'assignedUser', 'dateCreated', 'dateClosed', 'action']
-  displayedHeaders=['title', 'description', 'priority', 'assignedUser', 'dateCreated', 'dateClosed', ]
+  displayedColumns_Options: string[] = ['title', 'description', 'priority', 'assignedUser', 'dateCreated', 'dateClosed', 'action']
+  displayedColumns: string[] = this.displayedColumns_Options;
   bugs: BugDto[] = [];
 
   viewOpen: boolean = true;
 
   viewOpenToggle() {
     this.viewOpen = !this.viewOpen;
+
     this.refreshData();
+    this.setColumnVisibility();
+  }
+
+  setColumnVisibility() {
+    this.displayedColumns = this.viewOpen ? this.displayedColumns_Options.filter(c => c !== 'dateClosed') : this.displayedColumns_Options;
   }
 
   newBug() {
@@ -77,5 +83,6 @@ export class BugsComponent implements OnInit{
 
   ngOnInit(): void {
     this.refreshData();
+    this.setColumnVisibility();
   }
 }
