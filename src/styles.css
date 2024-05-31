@@ -31,3 +31,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     color: white !important;
     border: none;
 }
+
+.text-area-display {
+    white-space: pre-wrap;
+}
