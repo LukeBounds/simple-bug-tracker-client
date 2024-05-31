@@ -20,15 +20,11 @@ import { MatTableModule } from '@angular/material/table';
 export class BugComponent implements OnInit {
 
   constructor(
-    //private activatedRoute: ActivatedRoute,
     private bugService: BugService,
   ){}
 
   @Input({transform: numberAttribute}) id = 0;
   bug: BugDto | null = null;
-
-  displayedColumns=['headers', 'data', ]
-  displayedHeaders=['headers', 'data', ]
 
   editBug() {
     if (this.bug == null) return;
@@ -59,11 +55,6 @@ export class BugComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //this.id = 
-    // this.activatedRoute.params.subscribe(result => {
-    //   this.id = result['id'];
-    // });
-
     this.refreshData();
   }
 
