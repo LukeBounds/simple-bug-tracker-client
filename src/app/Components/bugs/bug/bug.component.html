@@ -3,7 +3,9 @@
         <mat-card-title>Bug Detail</mat-card-title>
         <span class="spacer"></span>
         <button mat-button color="primary" [routerLink]="'/bugs'">Bugs</button>
+        <mat-divider [vertical]="true"></mat-divider>
         <button mat-button color="primary" (click)="editBug()">Edit</button>
+        <mat-divider [vertical]="true"></mat-divider>
         <button mat-button color="primary" (click)="closeBug()" [disabled]="bug?.dateClosed != null">Close</button>
     </mat-card-header>
 
