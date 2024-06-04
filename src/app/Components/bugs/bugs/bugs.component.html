@@ -8,35 +8,35 @@
     </mat-card-header>
 
     <mat-card-content>
-        <mat-table [dataSource]="bugs">
+        <mat-table [dataSource]="bugs" matSort (matSortChange)="sortData($event)">
 
             <ng-container matColumnDef="title">
-              <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Title </mat-header-cell>
               <mat-cell *matCellDef="let element"> <a [routerLink]="'/bug/' + element.bugId">{{element.title}}</a> </mat-cell>
             </ng-container>
           
             <ng-container matColumnDef="description">
-              <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
               <mat-cell *matCellDef="let element"> <div class="description-cell text-area-display">{{element.description}}</div> </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="priority">
-                <mat-header-cell *matHeaderCellDef> Priority </mat-header-cell>
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Priority </mat-header-cell>
                 <mat-cell *matCellDef="let element"> {{element.priority | bugPriority}} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="assignedUser">
-                <mat-header-cell *matHeaderCellDef> Assigned User </mat-header-cell>
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Assigned User </mat-header-cell>
                 <mat-cell *matCellDef="let element"> {{element.assignedUser.name}} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="dateCreated">
-                <mat-header-cell *matHeaderCellDef> Date Created </mat-header-cell>
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Date Created </mat-header-cell>
                 <mat-cell *matCellDef="let element"> {{element.dateCreated | date}} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="dateClosed">
-                <mat-header-cell *matHeaderCellDef> Date Closed </mat-header-cell>
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Date Closed </mat-header-cell>
                 <mat-cell *matCellDef="let element"> {{element.dateClosed | date}} </mat-cell>
             </ng-container>
 
