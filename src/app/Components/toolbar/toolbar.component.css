@@ -1,5 +1,6 @@
 .toolbar-app-title {
     margin: 10px;
+    cursor: pointer;
 }
 
 .toolbar-divider {
