@@ -3,7 +3,9 @@
         <mat-card-title>Bug Detail</mat-card-title>
         <span class="spacer"></span>
         <button mat-button color="primary" [routerLink]="'/bugs'">Bugs</button>
+        <mat-divider [vertical]="true"></mat-divider>
         <button mat-button color="primary" (click)="editBug()">Edit</button>
+        <mat-divider [vertical]="true"></mat-divider>
         <button mat-button color="primary" (click)="closeBug()" [disabled]="bug?.dateClosed != null">Close</button>
     </mat-card-header>
 
@@ -23,7 +25,7 @@
                 </tr>
                 <tr>
                     <td class="header">Description</td>
-                    <td style="white-space: pre-wrap;">{{bug.description}}</td>
+                    <td class="text-area-display">{{bug.description}}</td>
                 </tr>
                 <tr>
                     <td class="header">Priority</td>

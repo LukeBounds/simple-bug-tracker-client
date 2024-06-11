@@ -9,6 +9,7 @@ export class DialogService {
   constructor() { }
 
   width_Medium = '500px';
+  width_Large = '800px';
 
   getNewOrEdit(mode: DialogMode) {
     if (mode == DialogMode.New) {

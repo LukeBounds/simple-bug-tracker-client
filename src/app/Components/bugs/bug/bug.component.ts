@@ -9,26 +9,23 @@ import { DatePipe } from '@angular/common';
 import { BugPriorityPipe } from '../../../Pipes/bug-priority.pipe';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
+import { MatDivider } from '@angular/material/divider';
 
 @Component({
   selector: 'app-bug',
   standalone: true,
-  imports: [RouterModule, MatCardModule, MatButtonModule, MatTableModule, DatePipe, BugPriorityPipe],
+  imports: [RouterModule, MatCardModule, MatButtonModule, MatTableModule, MatDivider, DatePipe, BugPriorityPipe],
   templateUrl: './bug.component.html',
   styleUrl: './bug.component.css'
 })
 export class BugComponent implements OnInit {
 
   constructor(
-    //private activatedRoute: ActivatedRoute,
     private bugService: BugService,
   ){}
 
   @Input({transform: numberAttribute}) id = 0;
   bug: BugDto | null = null;
-
-  displayedColumns=['headers', 'data', ]
-  displayedHeaders=['headers', 'data', ]
 
   editBug() {
     if (this.bug == null) return;
@@ -59,11 +56,6 @@ export class BugComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //this.id = 
-    // this.activatedRoute.params.subscribe(result => {
-    //   this.id = result['id'];
-    // });
-
     this.refreshData();
   }
 

@@ -9,11 +9,22 @@ import { BugPriorityPipe } from '../../../Pipes/bug-priority.pipe';
 import { DatePipe } from '@angular/common';
 import { firstValueFrom } from 'rxjs';
 import { RouterModule } from '@angular/router';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSortModule, Sort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-bugs',
   standalone: true,
-  imports: [RouterModule, MatButtonModule, MatCardModule, MatTableModule, BugPriorityPipe, DatePipe],
+  imports: [
+    RouterModule,
+    MatButtonModule,
+    MatCardModule,
+    MatTableModule,
+    MatDividerModule,
+    MatSortModule,
+    BugPriorityPipe,
+    DatePipe
+  ],
   templateUrl: './bugs.component.html',
   styleUrl: './bugs.component.css'
 })
@@ -23,15 +34,21 @@ export class BugsComponent implements OnInit{
     private bugService: BugService,
   ){}
 
-  displayedColumns=['title', 'description', 'priority', 'assignedUser', 'dateCreated', 'dateClosed', 'action']
-  displayedHeaders=['title', 'description', 'priority', 'assignedUser', 'dateCreated', 'dateClosed', ]
+  displayedColumns_Options: string[] = ['title', 'description', 'priority', 'assignedUser', 'dateCreated', 'dateClosed', 'action']
+  displayedColumns: string[] = this.displayedColumns_Options;
   bugs: BugDto[] = [];
 
   viewOpen: boolean = true;
 
   viewOpenToggle() {
     this.viewOpen = !this.viewOpen;
+
     this.refreshData();
+    this.setColumnVisibility();
+  }
+
+  setColumnVisibility() {
+    this.displayedColumns = this.viewOpen ? this.displayedColumns_Options.filter(c => c !== 'dateClosed') : this.displayedColumns_Options;
   }
 
   newBug() {
@@ -66,6 +83,38 @@ export class BugsComponent implements OnInit{
     });
   }
 
+  sortData(sort: Sort) {
+    let sortedData: BugDto[] = [];
+
+    const data = this.bugs.slice();
+    if (!sort.active || sort.direction === '') {
+      sortedData = data;
+      return;
+    }
+
+    sortedData = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'title':
+          return compare(a.title, b.title, isAsc);
+        case 'description':
+          return compare(a.description, b.description, isAsc);
+        case 'priority':
+          return compare(a.priority, b.priority, isAsc);
+        case 'assignedUser':
+            return compare(a.assignedUser.name, b.assignedUser.name, isAsc);
+        case 'dateCreated':
+          return compare(a.dateCreated, b.dateCreated, isAsc);
+        case 'dateClosed':
+            return compare(a.dateClosed ?? distantFuture, b.dateClosed ?? distantFuture, isAsc);
+        default:
+          return 0;
+      }
+    });
+
+    this.bugs = sortedData;
+  }
+
   private async refreshData() {
     if (this.viewOpen) {
       this.bugs = await firstValueFrom(this.bugService.getOpenBugs());
@@ -77,5 +126,13 @@ export class BugsComponent implements OnInit{
 
   ngOnInit(): void {
     this.refreshData();
+    this.setColumnVisibility();
   }
+
+}
+
+const distantFuture = new Date(8640000000000000)
+
+function compare(a: number | string | Date, b: number | string | Date, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

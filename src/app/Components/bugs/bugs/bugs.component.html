@@ -3,55 +3,56 @@
         <mat-card-title>Bugs{{viewOpen ? '' : ' - Closed'}}</mat-card-title>
         <span class="spacer"></span>
         <button mat-button color="primary" (click)="viewOpenToggle()">{{viewOpen ? 'View Closed' : 'View Open'}}</button>
+        <mat-divider [vertical]="true"></mat-divider>
         <button mat-button color="primary" (click)="newBug()">New Bug</button>
     </mat-card-header>
 
     <mat-card-content>
-        <table mat-table [dataSource]="bugs" class="mat">
+        <mat-table [dataSource]="bugs" matSort (matSortChange)="sortData($event)">
 
             <ng-container matColumnDef="title">
-              <th mat-header-cell *matHeaderCellDef> Title </th>
-              <td mat-cell *matCellDef="let element"> <a [routerLink]="'/bug/' + element.bugId">{{element.title}}</a> </td>
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Title </mat-header-cell>
+              <mat-cell *matCellDef="let element"> <a [routerLink]="'/bug/' + element.bugId">{{element.title}}</a> </mat-cell>
             </ng-container>
           
             <ng-container matColumnDef="description">
-              <th mat-header-cell *matHeaderCellDef> Description </th>
-              <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
+              <mat-cell *matCellDef="let element"> <div class="description-cell text-area-display">{{element.description}}</div> </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="priority">
-                <th mat-header-cell *matHeaderCellDef> Priority </th>
-                <td mat-cell *matCellDef="let element"> {{element.priority | bugPriority}} </td>
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Priority </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.priority | bugPriority}} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="assignedUser">
-                <th mat-header-cell *matHeaderCellDef> Assigned User </th>
-                <td mat-cell *matCellDef="let element"> {{element.assignedUser.name}} </td>
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Assigned User </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.assignedUser.name}} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="dateCreated">
-                <th mat-header-cell *matHeaderCellDef> Date Created </th>
-                <td mat-cell *matCellDef="let element"> {{element.dateCreated | date}} </td>
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Date Created </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.dateCreated | date}} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="dateClosed">
-                <th mat-header-cell *matHeaderCellDef [hidden]="viewOpen"> Date Closed </th>
-                <td mat-cell *matCellDef="let element" [hidden]="viewOpen"> {{element.dateClosed | date}} </td>
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Date Closed </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.dateClosed | date}} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="action">
-                <th mat-header-cell *matHeaderCellDef> Action </th>
-                <td mat-cell *matCellDef="let element"> 
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let element">
                   <button mat-button color="primary" (click)="editBug(element)">Edit</button>
                   @if(viewOpen) {
                     <button mat-button color="primary" (click)="closeBug(element)">Close</button>
                   }
-                </td>
+                </mat-cell>
             </ng-container>
           
-            <tr mat-header-row *matHeaderRowDef="displayedHeaders"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
     </mat-card-content>
 
     <mat-card-actions>

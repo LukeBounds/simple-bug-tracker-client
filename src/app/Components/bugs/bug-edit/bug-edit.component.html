@@ -2,7 +2,7 @@
 
     <h2 mat-dialog-title>{{newOrEdit}} Bug</h2>
 
-    <mat-dialog-content class="edit-form-display">
+    <mat-dialog-content>
 
         <mat-form-field class="form-field">
             <mat-label>Title</mat-label>
@@ -17,7 +17,7 @@
 
         <mat-form-field class="form-field">
             <mat-label>Description</mat-label>
-            <textarea matInput formControlName="description"></textarea>
+            <textarea matInput formControlName="description" rows="9"></textarea>
             @if (form.controls.description.hasError('required')) {
                 <mat-error>Description is required</mat-error>
             }
@@ -26,7 +26,7 @@
             }
         </mat-form-field>
 
-        <mat-form-field class="form-field">
+        <mat-form-field class="form-field form-field-half form-field-half-left">
             <mat-label>Priority</mat-label>
             <mat-select formControlName="priority">
                 @for (priority of bugPriorityList; track priority) {
@@ -38,7 +38,7 @@
             }
         </mat-form-field>
 
-        <mat-form-field class="form-field">
+        <mat-form-field class="form-field form-field-half form-field-half-right">
             <mat-label>Assigned User</mat-label>
             <mat-select formControlName="assignedUser" [compareWith]="compareUsers">
                 @for (user of users; track user.userId) {

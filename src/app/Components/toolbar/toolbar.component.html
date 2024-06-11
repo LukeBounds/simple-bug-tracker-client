@@ -1,5 +1,5 @@
 <mat-toolbar>
-    <span class="toolbar-app-title">Simple Bug Tracker</span>
+    <span class="toolbar-app-title" [routerLink]="'/'">Simple Bug Tracker</span>
 
     <mat-divider class="toolbar-divider" [vertical]="true"></mat-divider>
     
@@ -11,5 +11,16 @@
     
     <span class="spacer"></span>
 
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Github navigation menu">
+        <mat-icon svgIcon="github-fa"></mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="navToGithub_Client()">
+            <span>Client</span>
+        </button>
+        <button mat-menu-item (click)="navToGithub_BackEnd()">
+            <span>Back End</span>
+        </button>
+    </mat-menu>
 
 </mat-toolbar>

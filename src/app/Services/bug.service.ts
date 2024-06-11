@@ -52,7 +52,7 @@ export class BugService {
   openBugEditDialog(mode: DialogMode, bug: BugDto) {
     const dialogRef = this.dialog.open(BugEditComponent, {
       data: {mode: mode, bug: structuredClone(bug)},
-      width: this.dialogService.width_Medium,
+      width: this.dialogService.width_Large,
     });
 
     return dialogRef;
