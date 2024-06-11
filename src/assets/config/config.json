@@ -1,3 +1,4 @@
 {
-    "API_URL":  "https://simplebugtrackerbackend.azurewebsites.net/"
+    "API_URL":  "https://simplebugtrackerbackend.azurewebsites.net/",
+    "API_URL_LOCAL":  "https://localhost:7005/"
 }
