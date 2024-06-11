@@ -8,6 +8,8 @@ Demonstrates custom pipe.
 Demonstrates custom factory.  
   
 Config is stored in a local file (assets\config\config.json) so that config can be edited after a build has been created. This is in preference to using an environment.ts file to store the config which 'bakes it in' at compile time. 
+
+CI/CD setup with github actions and azure static web app service.  
   
 To setup the client:  
 Run npm i to install packages.  
